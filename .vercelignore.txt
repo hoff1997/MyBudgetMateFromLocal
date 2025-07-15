@@ -20,11 +20,14 @@ postcss.config.js
 vite.config.ts
 
 # Include these for deployment
-!api/
-!api/**
 !dist/
 !dist/**
 !public/
 !public/**
 !package.json
 !vercel.json
+!scripts/
+!scripts/**
+
+# Exclude source API files (we include built versions)
+api/
