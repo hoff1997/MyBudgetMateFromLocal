@@ -1,0 +1,30 @@
+# Vercel deployment - include API functions and built frontend
+# Ignore source files but include built assets and API functions
+
+# Ignore source directories  
+server/
+client/
+shared/
+config-files/
+scripts/
+
+# Ignore development files
+*.md
+!README.md
+.env*
+.replit
+replit.nix
+tsconfig.json
+tailwind.config.ts
+postcss.config.js
+vite.config.ts
+
+# Include these for deployment
+!api/
+!api/**
+!dist/
+!dist/**
+!public/
+!public/**
+!package.json
+!vercel.json
