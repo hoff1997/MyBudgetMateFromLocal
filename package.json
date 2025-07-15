@@ -8,5 +8,6 @@
     "vercel-debug": "node scripts/list-api.cjs",
     "start": "NODE_ENV=production node dist/index.js"
   },
-  ...
+  "dependencies": {},
+  "devDependencies": {}
 }
