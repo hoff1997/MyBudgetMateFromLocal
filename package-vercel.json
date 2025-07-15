@@ -1,0 +1,12 @@
+{
+  "name": "my-budget-mate",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "npx vite build --outDir=dist/public"
+  },
+  "devDependencies": {
+    "vite": "*",
+    "@vitejs/plugin-react": "*"
+  }
+}

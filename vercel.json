@@ -1,4 +1,45 @@
 {
-  "buildCommand": "rm -rf api && mkdir -p public && echo '<h1>My Budget Mate</h1><p>Access the full app: <a href=\"https://mybudgetmate.replit.app\">mybudgetmate.replit.app</a></p>' > public/index.html",
-  "outputDirectory": "public"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/public"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "functions": {
+    "api/auth/login.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    },
+    "api/auth/user.ts": {
+      "runtime": "@vercel/node@3.0.0"  
+    },
+    "api/envelopes.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    },
+    "api/transactions.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    },
+    "api/accounts.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    },
+    "api/ping.ts": {
+      "runtime": "@vercel/node@3.0.0"
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
