@@ -1,6 +1,0 @@
-*
-!public/
-!public/**
-!api/
-!api/**/*.ts
-!vercel.json
