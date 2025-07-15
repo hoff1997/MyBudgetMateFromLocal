@@ -1,23 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "vite build",
   "outputDirectory": "dist/public",
   "functions": {
-    "api/auth/login.ts": {
-      "runtime": "@vercel/node@3.0.0"
-    },
-    "api/auth/user.ts": {
-      "runtime": "@vercel/node@3.0.0"  
-    },
-    "api/envelopes.ts": {
-      "runtime": "@vercel/node@3.0.0"
-    },
-    "api/transactions.ts": {
-      "runtime": "@vercel/node@3.0.0"
-    },
-    "api/accounts.ts": {
-      "runtime": "@vercel/node@3.0.0"
-    },
-    "api/ping.ts": {
+    "api/**/*.ts": {
       "runtime": "@vercel/node@3.0.0"
     }
   },
