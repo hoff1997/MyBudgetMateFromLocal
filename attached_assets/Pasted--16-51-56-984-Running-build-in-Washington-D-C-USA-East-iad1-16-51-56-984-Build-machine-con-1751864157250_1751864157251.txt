@@ -1,0 +1,105 @@
+[16:51:56.984] Running build in Washington, D.C., USA (East) – iad1
+[16:51:56.984] Build machine configuration: 2 cores, 8 GB
+[16:51:57.003] Cloning github.com/hoff1997/MyBudgetMate (Branch: main, Commit: c7f6686)
+[16:51:57.135] Previous build caches not available
+[16:51:57.319] Cloning completed: 316.000ms
+[16:51:57.661] Running "vercel build"
+[16:51:58.274] Vercel CLI 44.2.10
+[16:51:58.858] > Installing Builder: @vercel/node@3.0.0
+[16:52:09.335] Running "install" command: `npm install`...
+[16:52:14.447] npm warn deprecated @supabase/auth-helpers-react@0.5.0: This package is now deprecated - please use the @supabase/ssr package instead.
+[16:52:14.792] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[16:52:14.813] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[16:52:21.039] 
+[16:52:21.040] added 674 packages, and audited 675 packages in 12s
+[16:52:21.040] 
+[16:52:21.041] 76 packages are looking for funding
+[16:52:21.041]   run `npm fund` for details
+[16:52:21.072] 
+[16:52:21.073] 12 vulnerabilities (1 low, 9 moderate, 2 high)
+[16:52:21.073] 
+[16:52:21.073] To address issues that do not require attention, run:
+[16:52:21.073]   npm audit fix
+[16:52:21.073] 
+[16:52:21.074] To address all issues (including breaking changes), run:
+[16:52:21.074]   npm audit fix --force
+[16:52:21.074] 
+[16:52:21.074] Run `npm audit` for details.
+[16:52:21.363] 
+[16:52:21.367] > rest-express@1.0.0 build
+[16:52:21.367] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[16:52:21.367] 
+[16:52:21.605] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[16:52:21.653] transforming...
+[16:52:21.940] Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+[16:52:21.940]   npx update-browserslist-db@latest
+[16:52:21.940]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[16:52:31.335] [32m✓[39m 3407 modules transformed.
+[16:52:32.189] rendering chunks...
+[16:52:32.208] computing gzip size...
+[16:52:32.241] [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m    0.63 kB[22m[1m[22m[2m │ gzip:   0.38 kB[22m
+[16:52:32.241] [2m../dist/public/[22m[2massets/[22m[35mindex-DpqffX4s.css  [39m[1m[2m   88.58 kB[22m[1m[22m[2m │ gzip:  15.28 kB[22m
+[16:52:32.241] [2m../dist/public/[22m[2massets/[22m[36mindex-zGR1JK2j.js   [39m[1m[33m1,383.78 kB[39m[22m[2m │ gzip: 371.26 kB[22m
+[16:52:32.242] [33m
+[16:52:32.242] (!) Some chunks are larger than 500 kB after minification. Consider:
+[16:52:32.242] - Using dynamic import() to code-split the application
+[16:52:32.242] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[16:52:32.242] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[16:52:32.243] [32m✓ built in 10.61s[39m
+[16:52:32.297] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[16:52:32.297] 
+[16:52:32.297]     server/storage.ts:1050:8:
+[16:52:32.297]       1050 │   async updateEnvelopeCategory(id: number, updates: Partial<Enve...
+[16:52:32.297]            ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.298] 
+[16:52:32.298]   The original member "updateEnvelopeCategory" is here:
+[16:52:32.298] 
+[16:52:32.298]     server/storage.ts:1007:8:
+[16:52:32.298]       1007 │   async updateEnvelopeCategory(id: number, categoryId: number | ...
+[16:52:32.298]            ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.298] 
+[16:52:32.298] ▲ [WARNING] Duplicate member "initializeDefaultEnvelopeTypes" in class body [duplicate-class-member]
+[16:52:32.298] 
+[16:52:32.299]     server/storage.ts:1480:8:
+[16:52:32.299]       1480 │   async initializeDefaultEnvelopeTypes(userId: number): Promise<...
+[16:52:32.299]            ╵         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.299] 
+[16:52:32.299]   The original member "initializeDefaultEnvelopeTypes" is here:
+[16:52:32.299] 
+[16:52:32.299]     server/storage.ts:234:10:
+[16:52:32.299]       234 │   private initializeDefaultEnvelopeTypes() {
+[16:52:32.299]           ╵           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.300] 
+[16:52:32.300] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[16:52:32.300] 
+[16:52:32.300]     server/replit-storage.ts:445:8:
+[16:52:32.300]       445 │   async updateEnvelopeCategory(id: number, categoryId: number | n...
+[16:52:32.300]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.300] 
+[16:52:32.300]   The original member "updateEnvelopeCategory" is here:
+[16:52:32.301] 
+[16:52:32.301]     server/replit-storage.ts:394:8:
+[16:52:32.301]       394 │   async updateEnvelopeCategory(id: number, data: any): Promise<an...
+[16:52:32.301]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.301] 
+[16:52:32.311] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[16:52:32.311] 
+[16:52:32.312]     server/supabase-storage.ts:408:8:
+[16:52:32.312]       408 │   async updateEnvelopeCategory(id: number, updates: Partial<Envel...
+[16:52:32.312]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.312] 
+[16:52:32.312]   The original member "updateEnvelopeCategory" is here:
+[16:52:32.312] 
+[16:52:32.312]     server/supabase-storage.ts:342:8:
+[16:52:32.312]       342 │   async updateEnvelopeCategory(id: number, categoryId: number | n...
+[16:52:32.312]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[16:52:32.312] 
+[16:52:32.312] 4 warnings
+[16:52:32.313] 
+[16:52:32.313]   dist/index.js  224.3kb
+[16:52:32.313] 
+[16:52:32.313] ⚡ Done in 24ms
+[16:52:32.356] Error: Found invalid Node.js Version: "22.x". Please set Node.js Version to 18.x in your Project Settings to use Node.js 18.
+[16:52:32.356] Learn More: http://vercel.link/node-version
+[16:52:32.629] 
+[16:52:35.195] Exiting build container

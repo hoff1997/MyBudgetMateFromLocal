@@ -1,0 +1,58 @@
+I want to build a Zero-Based Budget Setup feature for my budgeting app. Assume this is a brand-new screen (not yet built). Here’s what I need:
+
+✅ GOAL:
+A user-friendly setup screen where users define all their annual expenses (envelopes), and the system automatically calculates per-pay-cycle amounts. It should return a zero-based budget each cycle (e.g., fortnightly), showing either a surplus or deficit and letting users handle that intelligently.
+
+📋 FEATURES:
+
+1. **Setup Table Interface**
+   - Display a table where each row represents an expense or savings envelope.
+   - Columns:
+     - Envelope Name
+     - Type (e.g., Expense, Saving, Goal)
+     - Frequency (Weekly, Fortnightly, Monthly, Quarterly, Annually)
+     - Annual Amount ($)
+     - Per Pay Cycle Amount (calculated based on frequency and cycle length)
+     - Notes (optional)
+
+2. **Pay Cycle Support**
+   - Let users define their budgeting cycle globally (e.g., fortnightly)
+   - Use this cycle to calculate the correct per-pay-cycle amount for each envelope
+
+3. **Surplus/Deficit Logic**
+   - Below the table, display a dynamic calculation:
+     - Sum all income across streams
+     - Sum all calculated per-pay-cycle expenses (from the envelopes above)
+     - Show: “You have a $X surplus” or “You are $X over budget”
+
+4. **Surplus Allocation Tool**
+   - If surplus exists, show a button: “Allocate Surplus to Envelope”
+   - Clicking opens a form where users can split surplus across existing envelopes
+   - Validate total allocation = surplus amount
+
+5. **Add Envelope**
+   - A “+ Add Envelope” button allows the user to add a new row to the table
+   - This also creates a new envelope in Supabase with default values
+
+6. **Two-Way Sync with Envelope System**
+   - This table is not isolated — it's the source of truth for envelope settings
+   - Any update here reflects in the main envelope budget screen
+   - Edits made in the envelope budget screen also reflect back here
+
+7. **Income Sources (for Calculations Only)**
+   - Let users enter income sources, frequency, and annual amount
+   - These are not saved in the envelope system
+   - They only power the surplus/deficit calculation logic
+
+8. **Database Integration**
+   - Use Supabase to store all envelope data:
+     - name, frequency, annual_amount, paycycle_amount, type, notes
+   - Ensure chart reads from and writes to Supabase in real time
+
+9. **UX Notes**
+   - Mobile-friendly
+   - Use validation to ensure annual + cycle data stays clean
+   - Highlight when the user reaches a balanced ($0) budget
+
+🎯 OUTCOME:
+This screen acts as the onboarding budget planner and ongoing update point for users to maintain a zero-based plan per cycle. It feeds directly into the envelope budgeting engine of the app.

@@ -1,0 +1,221 @@
+[19:11:12.077] Running build in Washington, D.C., USA (East) – iad1
+[19:11:12.078] Build machine configuration: 2 cores, 8 GB
+[19:11:12.095] Cloning github.com/hoff1997/MyBudgetMate (Branch: main, Commit: 0abba0e)
+[19:11:12.121] Skipping build cache, deployment was triggered without cache.
+[19:11:12.460] Cloning completed: 365.000ms
+[19:11:12.791] Running "vercel build"
+[19:11:13.282] Vercel CLI 44.2.12
+[19:11:13.915] > Installing Builder: @vercel/node@3.0.0
+[19:11:23.951] Running "install" command: `npm install`...
+[19:11:30.027] npm warn deprecated @supabase/auth-helpers-react@0.5.0: This package is now deprecated - please use the @supabase/ssr package instead.
+[19:11:30.530] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[19:11:30.559] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[19:11:38.460] 
+[19:11:38.460] added 674 packages, and audited 675 packages in 14s
+[19:11:38.461] 
+[19:11:38.461] 76 packages are looking for funding
+[19:11:38.461]   run `npm fund` for details
+[19:11:38.501] 
+[19:11:38.501] 12 vulnerabilities (1 low, 9 moderate, 2 high)
+[19:11:38.501] 
+[19:11:38.501] To address issues that do not require attention, run:
+[19:11:38.501]   npm audit fix
+[19:11:38.501] 
+[19:11:38.501] To address all issues (including breaking changes), run:
+[19:11:38.501]   npm audit fix --force
+[19:11:38.501] 
+[19:11:38.501] Run `npm audit` for details.
+[19:11:38.804] 
+[19:11:38.805] > rest-express@1.0.0 build
+[19:11:38.805] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[19:11:38.805] 
+[19:11:39.029] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[19:11:39.075] transforming...
+[19:11:39.365] Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+[19:11:39.365]   npx update-browserslist-db@latest
+[19:11:39.366]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[19:11:50.398] [32m✓[39m 3407 modules transformed.
+[19:11:51.357] rendering chunks...
+[19:11:51.379] computing gzip size...
+[19:11:51.415] [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m    0.63 kB[22m[1m[22m[2m │ gzip:   0.38 kB[22m
+[19:11:51.415] [2m../dist/public/[22m[2massets/[22m[35mindex-DpqffX4s.css  [39m[1m[2m   88.58 kB[22m[1m[22m[2m │ gzip:  15.28 kB[22m
+[19:11:51.415] [2m../dist/public/[22m[2massets/[22m[36mindex-zGR1JK2j.js   [39m[1m[33m1,383.78 kB[39m[22m[2m │ gzip: 371.26 kB[22m
+[19:11:51.416] [33m
+[19:11:51.416] (!) Some chunks are larger than 500 kB after minification. Consider:
+[19:11:51.416] - Using dynamic import() to code-split the application
+[19:11:51.416] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[19:11:51.416] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[19:11:51.417] [32m✓ built in 12.37s[39m
+[19:11:51.477] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[19:11:51.477] 
+[19:11:51.478]     server/storage.ts:1050:8:
+[19:11:51.478]       1050 │   async updateEnvelopeCategory(id: number, updates: Partial<Enve...
+[19:11:51.478]            ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.478] 
+[19:11:51.478]   The original member "updateEnvelopeCategory" is here:
+[19:11:51.478] 
+[19:11:51.479]     server/storage.ts:1007:8:
+[19:11:51.479]       1007 │   async updateEnvelopeCategory(id: number, categoryId: number | ...
+[19:11:51.479]            ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.479] 
+[19:11:51.480] ▲ [WARNING] Duplicate member "initializeDefaultEnvelopeTypes" in class body [duplicate-class-member]
+[19:11:51.480] 
+[19:11:51.480]     server/storage.ts:1480:8:
+[19:11:51.480]       1480 │   async initializeDefaultEnvelopeTypes(userId: number): Promise<...
+[19:11:51.480]            ╵         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.481] 
+[19:11:51.481]   The original member "initializeDefaultEnvelopeTypes" is here:
+[19:11:51.481] 
+[19:11:51.481]     server/storage.ts:234:10:
+[19:11:51.481]       234 │   private initializeDefaultEnvelopeTypes() {
+[19:11:51.481]           ╵           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.481] 
+[19:11:51.483] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[19:11:51.483] 
+[19:11:51.484]     server/replit-storage.ts:445:8:
+[19:11:51.484]       445 │   async updateEnvelopeCategory(id: number, categoryId: number | n...
+[19:11:51.484]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.484] 
+[19:11:51.484]   The original member "updateEnvelopeCategory" is here:
+[19:11:51.484] 
+[19:11:51.484]     server/replit-storage.ts:394:8:
+[19:11:51.484]       394 │   async updateEnvelopeCategory(id: number, data: any): Promise<an...
+[19:11:51.484]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.484] 
+[19:11:51.493] ▲ [WARNING] Duplicate member "updateEnvelopeCategory" in class body [duplicate-class-member]
+[19:11:51.493] 
+[19:11:51.493]     server/supabase-storage.ts:408:8:
+[19:11:51.493]       408 │   async updateEnvelopeCategory(id: number, updates: Partial<Envel...
+[19:11:51.493]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.493] 
+[19:11:51.493]   The original member "updateEnvelopeCategory" is here:
+[19:11:51.493] 
+[19:11:51.493]     server/supabase-storage.ts:342:8:
+[19:11:51.493]       342 │   async updateEnvelopeCategory(id: number, categoryId: number | n...
+[19:11:51.494]           ╵         ~~~~~~~~~~~~~~~~~~~~~~
+[19:11:51.494] 
+[19:11:51.494] 4 warnings
+[19:11:51.494] 
+[19:11:51.494]   dist/index.js  225.9kb
+[19:11:51.494] 
+[19:11:51.494] ⚡ Done in 24ms
+[19:11:51.533] Installing dependencies...
+[19:11:52.937] 
+[19:11:52.938] up to date in 1s
+[19:11:52.939] 
+[19:11:52.939] 76 packages are looking for funding
+[19:11:52.939]   run `npm fund` for details
+[19:11:53.173] Using TypeScript 5.6.3 (local user-provided)
+[19:11:58.106] Using TypeScript 5.6.3 (local user-provided)
+[19:11:59.251] Using TypeScript 5.6.3 (local user-provided)
+[19:12:01.544] api/envelopes/index.ts(32,62): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+[19:12:01.545] 
+[19:12:02.133] server/storage.ts(228,9): error TS2561: Object literal may only specify known properties, but 'colour' does not exist in type '{ id: number; name: string; createdAt: Date | null; userId: number; sortOrder: number | null; color: string; }'. Did you mean to write 'color'?
+[19:12:02.134] server/storage.ts(234,11): error TS2393: Duplicate function implementation.
+[19:12:02.134] server/storage.ts(288,9): error TS2353: Object literal may only specify known properties, and 'isDefault' does not exist in type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean | null; icon: string; sortOrder: number | null; color: string | null; isCollapsed: boolean | null; }'.
+[19:12:02.134] server/storage.ts(366,9): error TS2353: Object literal may only specify known properties, and 'budget' does not exist in type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }'.
+[19:12:02.135] server/storage.ts(398,9): error TS2561: Object literal may only specify known properties, but 'colour' does not exist in type '{ id: number; name: string; createdAt: Date | null; userId: number; sortOrder: number | null; color: string; }'. Did you mean to write 'color'?
+[19:12:02.135] server/storage.ts(408,11): error TS2740: Type '{ id: number; username: string; password: string; payCycle: string; budgetName: string; }' is missing the following properties from type '{ id: number; username: string; password: string | null; payCycle: string | null; payCycleStartDate: Date | null; budgetName: string | null; twoFactorEnabled: boolean | null; ... 10 more ...; updatedAt: Date | null; }': payCycleStartDate, twoFactorEnabled, twoFactorSecret, backupCodes, and 9 more.
+[19:12:02.136] server/storage.ts(765,42): error TS2345: Argument of type '{ id: number; userId: number; name: string; liabilityType: string; currentBalance: string; interestRate: string; minimumPayment: string; notes: string; }' is not assignable to parameter of type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; type: string; balance: string; interestRate: string | null; minimumPayment: string | null; }'.
+[19:12:02.139]   Type '{ id: number; userId: number; name: string; liabilityType: string; currentBalance: string; interestRate: string; minimumPayment: string; notes: string; }' is missing the following properties from type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; type: string; balance: string; interestRate: string | null; minimumPayment: string | null; }': createdAt, updatedAt, type, balance
+[19:12:02.139] server/storage.ts(824,39): error TS2345: Argument of type '{ id: number; userId: number; name: string; icon: string; budgetedAmount: string; currentBalance: string; categoryId: null; sortOrder: number; isActive: boolean; isMonitored: boolean; paymentSchedule: string; nextPaymentDue: string; isSpendingAccount: boolean; createdAt: Date; updatedAt: Date; }' is not assignable to parameter of type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }'.
+[19:12:02.141]   Type '{ id: number; userId: number; name: string; icon: string; budgetedAmount: string; currentBalance: string; categoryId: null; sortOrder: number; isActive: boolean; isMonitored: boolean; paymentSchedule: string; nextPaymentDue: string; isSpendingAccount: boolean; createdAt: Date; updatedAt: Date; }' is missing the following properties from type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }': parentId, openingBalance, budgetFrequency, annualAmount, and 4 more.
+[19:12:02.144] server/storage.ts(850,11): error TS2740: Type '{ id: number; username: string; password?: string | null | undefined; }' is missing the following properties from type '{ id: number; username: string; password: string | null; payCycle: string | null; payCycleStartDate: Date | null; budgetName: string | null; twoFactorEnabled: boolean | null; ... 10 more ...; updatedAt: Date | null; }': payCycle, payCycleStartDate, budgetName, twoFactorEnabled, and 11 more.
+[19:12:02.146] server/storage.ts(881,13): error TS2741: Property 'payCycleStartDate' is missing in type '{ id: number; username: string; email: string | null; firstName: string | null; lastName: string | null; profileImageUrl: string | null; replitId: string; createdAt: Date; updatedAt: Date; ... 7 more ...; emailVerified: false; }' but required in type '{ id: number; username: string; password: string | null; payCycle: string | null; payCycleStartDate: Date | null; budgetName: string | null; twoFactorEnabled: boolean | null; ... 10 more ...; updatedAt: Date | null; }'.
+[19:12:02.147] server/storage.ts(969,11): error TS2322: Type '{ id: number; currentBalance: string; openingBalance: string; budgetFrequency: string; nextPaymentDue: Date | null; isSpendingAccount: boolean; isMonitored: boolean; isActive: boolean; ... 13 more ...; notes?: string | ... 1 more ... | undefined; }' is not assignable to type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }'.
+[19:12:02.148]   Types of property 'annualAmount' are incompatible.
+[19:12:02.149]     Type 'string | null | undefined' is not assignable to type 'string | null'.
+[19:12:02.149]       Type 'undefined' is not assignable to type 'string | null'.
+[19:12:02.149] server/storage.ts(1007,9): error TS2393: Duplicate function implementation.
+[19:12:02.149] server/storage.ts(1050,9): error TS2393: Duplicate function implementation.
+[19:12:02.150] server/storage.ts(1122,7): error TS2322: Type 'false | unknown[] | [any, ...any[]]' is not assignable to type 'boolean'.
+[19:12:02.150]   Type 'unknown[]' is not assignable to type 'boolean'.
+[19:12:02.150] server/storage.ts(1123,7): error TS2322: Type 'unknown[] | [any, ...any[]] | null' is not assignable to type 'number | null'.
+[19:12:02.150]   Type 'unknown[]' is not assignable to type 'number'.
+[19:12:02.150] server/storage.ts(1124,7): error TS2322: Type 'unknown[] | [any, ...any[]] | null' is not assignable to type 'string | null'.
+[19:12:02.151]   Type 'unknown[]' is not assignable to type 'string'.
+[19:12:02.151] server/storage.ts(1125,7): error TS2322: Type 'unknown[] | [any, ...any[]] | null' is not assignable to type 'string | null'.
+[19:12:02.151]   Type 'unknown[]' is not assignable to type 'string'.
+[19:12:02.151] server/storage.ts(1131,35): error TS2488: Type '{}' must have a '[Symbol.iterator]()' method that returns an iterator.
+[19:12:02.151] server/storage.ts(1280,11): error TS2741: Property 'createdAt' is missing in type '{ id: number; name: string; userId: number; sortOrder?: number | null | undefined; color?: string | undefined; }' but required in type '{ id: number; name: string; createdAt: Date | null; userId: number; sortOrder: number | null; color: string; }'.
+[19:12:02.152] server/storage.ts(1335,11): error TS2739: Type '{ id: number; name: string; userId: number; type: string; value: string; }' is missing the following properties from type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; type: string; value: string; }': createdAt, updatedAt
+[19:12:02.154] server/storage.ts(1362,11): error TS2739: Type '{ id: number; name: string; userId: number; type: string; balance: string; interestRate?: string | null | undefined; minimumPayment?: string | null | undefined; }' is missing the following properties from type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; type: string; balance: string; interestRate: string | null; minimumPayment: string | null; }': createdAt, updatedAt
+[19:12:02.155] server/storage.ts(1382,34): error TS2339: Property 'snapshotDate' does not exist on type '{ id: number; createdAt: Date | null; userId: number; totalAssets: string; totalLiabilities: string; netWorth: string; }'.
+[19:12:02.155] server/storage.ts(1382,71): error TS2339: Property 'snapshotDate' does not exist on type '{ id: number; createdAt: Date | null; userId: number; totalAssets: string; totalLiabilities: string; netWorth: string; }'.
+[19:12:02.155] server/storage.ts(1390,7): error TS2353: Object literal may only specify known properties, and 'snapshotDate' does not exist in type '{ id: number; createdAt: Date | null; userId: number; totalAssets: string; totalLiabilities: string; netWorth: string; }'.
+[19:12:02.155] server/storage.ts(1407,11): error TS2739: Type '{ id: number; name: string; userId: number; accountId: number; amount: string; merchant: string; frequency: string; nextDate: Date; isActive?: boolean | null | undefined; description?: string | null | undefined; endDate?: Date | ... 1 more ... | undefined; isIncome?: boolean | ... 1 more ... | undefined; }' is missing the following properties from type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean | null; accountId: number; amount: string; merchant: string; description: string | null; frequency: string; nextDate: Date; endDate: Date | null; isIncome: boolean | null; }': createdAt, updatedAt
+[19:12:02.157] server/storage.ts(1449,23): error TS18047: 'a.sortOrder' is possibly 'null'.
+[19:12:02.157] server/storage.ts(1449,37): error TS18047: 'b.sortOrder' is possibly 'null'.
+[19:12:02.157] server/storage.ts(1458,11): error TS2322: Type '{ id: number; createdAt: Date; updatedAt: Date; name: string; userId: number; icon: string; color: string; isActive?: boolean | null | undefined; sortOrder?: number | null | undefined; isDefault?: boolean | ... 1 more ... | undefined; }' is not assignable to type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean | null; icon: string; sortOrder: number | null; color: string; isDefault: boolean | null; }'.
+[19:12:02.158]   Types of property 'isActive' are incompatible.
+[19:12:02.158]     Type 'boolean | null | undefined' is not assignable to type 'boolean | null'.
+[19:12:02.159]       Type 'undefined' is not assignable to type 'boolean | null'.
+[19:12:02.159] server/storage.ts(1480,9): error TS2393: Duplicate function implementation.
+[19:12:02.159] server/storage.ts(1513,11): error TS2322: Type '{ createdAt: Date; updatedAt: Date; userId: number; bankId: string; bankName: string; connectionId: string; accessToken: string; isActive?: boolean | null | undefined; refreshToken?: string | ... 1 more ... | undefined; consentExpiry?: Date | ... 1 more ... | undefined; lastSync?: Date | ... 1 more ... | undefined; ...' is not assignable to type '{ id: number; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean | null; bankId: string; bankName: string; connectionId: string; accessToken: string; refreshToken: string | null; consentExpiry: Date | null; lastSync: Date | null; }'.
+[19:12:02.160]   Types of property 'isActive' are incompatible.
+[19:12:02.160]     Type 'boolean | null | undefined' is not assignable to type 'boolean | null'.
+[19:12:02.161]       Type 'undefined' is not assignable to type 'boolean | null'.
+[19:12:02.161] 
+[19:12:02.347] shared/schema.ts(98,14): error TS7022: 'transactions' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+[19:12:02.348] shared/schema.ts(114,56): error TS7024: Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+[19:12:02.348] shared/schema.ts(297,53): error TS2552: Cannot find name 'insertEnvelopeCategorySchema'. Did you mean 'insertEnvelopeSchema'?
+[19:12:02.348] 
+[19:12:02.518] server/supabase-storage.ts(42,14): error TS2420: Class 'SupabaseStorage' incorrectly implements interface 'IStorage'.
+[19:12:02.518]   Type 'SupabaseStorage' is missing the following properties from type 'IStorage': getUserTwoFactorInfo, updateUserTwoFactor, getEnvelopeTypesByUserId, getEnvelopeType, and 3 more.
+[19:12:02.518] server/supabase-storage.ts(342,9): error TS2393: Duplicate function implementation.
+[19:12:02.518] server/supabase-storage.ts(408,9): error TS2393: Duplicate function implementation.
+[19:12:02.518] server/supabase-storage.ts(511,40): error TS2561: Object literal may only specify known properties, but 'approved' does not exist in type 'Partial<{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; transferToAccountId: number | null; ... 7 more ...; bankMemo: string | null; }>'. Did you mean to write 'isApproved'?
+[19:12:02.518] server/supabase-storage.ts(707,28): error TS2304: Cannot find name 'InsertLabel'.
+[19:12:02.518] 
+[19:12:02.712] server/replit-storage.ts(128,40): error TS2339: Property 'replitId' does not exist on type '{ username: string; password?: string | null | undefined; }'.
+[19:12:02.713] server/replit-storage.ts(149,7): error TS2322: Type 'string | null' is not assignable to type 'string'.
+[19:12:02.713]   Type 'null' is not assignable to type 'string'.
+[19:12:02.714] server/replit-storage.ts(165,9): error TS2416: Property 'getAccountsByUserId' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.714]   Type '(userId: string) => Promise<{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }[]>' is not assignable to type '(userId: number) => Promise<{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }[]>'.
+[19:12:02.714]     Types of parameters 'userId' and 'userId' are incompatible.
+[19:12:02.714]       Type 'number' is not assignable to type 'string'.
+[19:12:02.714] server/replit-storage.ts(189,7): error TS2353: Object literal may only specify known properties, and 'createdAt' does not exist in type '{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }'.
+[19:12:02.715] server/replit-storage.ts(196,9): error TS2416: Property 'updateAccount' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.715]   Type '(id: number, accountData: Partial<{ name: string; userId: number; type: string; balance?: string | undefined; isActive?: boolean | undefined; }>) => Promise<{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }>' is not assignable to type '(id: number, updates: Partial<{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }>) => Promise<void>'.
+[19:12:02.716]     Type 'Promise<{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }>' is not assignable to type 'Promise<void>'.
+[19:12:02.716]       Type '{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }' is not assignable to type 'void'.
+[19:12:02.716] server/replit-storage.ts(203,7): error TS2353: Object literal may only specify known properties, and 'updatedAt' does not exist in type '{ id: number; name: string; userId: number; type: string; balance: string; isActive: boolean; }'.
+[19:12:02.716] server/replit-storage.ts(217,9): error TS2416: Property 'getEnvelopesByUserId' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.717]   Type '(userId: string) => Promise<{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; ... 13 more ...; notes: string | null; }[]>' is not assignable to type '(userId: number) => Promise<{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; ... 13 more ...; notes: string | null; }[]>'.
+[19:12:02.718]     Types of parameters 'userId' and 'userId' are incompatible.
+[19:12:02.718]       Type 'number' is not assignable to type 'string'.
+[19:12:02.718] server/replit-storage.ts(238,11): error TS2322: Type '{ createdAt: Date; updatedAt: Date; name: string; userId: number; isActive?: boolean | undefined; icon?: string | null | undefined; parentId?: number | null | undefined; categoryId?: number | ... 1 more ... | undefined; ... 13 more ...; id: number; }' is not assignable to type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }'.
+[19:12:02.719]   Types of property 'isActive' are incompatible.
+[19:12:02.720]     Type 'boolean | undefined' is not assignable to type 'boolean'.
+[19:12:02.720]       Type 'undefined' is not assignable to type 'boolean'.
+[19:12:02.720] server/replit-storage.ts(248,9): error TS2416: Property 'updateEnvelope' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.720]   Type '(id: number, envelopeData: Partial<{ name: string; userId: number; isActive?: boolean | undefined; icon?: string | null | undefined; parentId?: number | null | undefined; categoryId?: number | null | undefined; ... 12 more ...; notes?: string | ... 1 more ... | undefined; }>) => Promise<...>' is not assignable to type '(id: number, updates: Partial<{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; ... 13 more ...; notes: string | null; }>) => Promise<...>'.
+[19:12:02.727]     Type 'Promise<{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }>' is not assignable to type 'Promise<void>'.
+[19:12:02.728]       Type '{ id: number; name: string; createdAt: Date | null; updatedAt: Date | null; userId: number; isActive: boolean; icon: string | null; parentId: number | null; categoryId: number | null; ... 12 more ...; notes: string | null; }' is not assignable to type 'void'.
+[19:12:02.728] server/replit-storage.ts(269,9): error TS2416: Property 'getTransactionsByUserId' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.728]   Type '(userId: string) => Promise<{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; ... 8 more ...; bankMemo: string | null; }[]>' is not assignable to type '(userId: number) => Promise<{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; ... 8 more ...; bankMemo: string | null; }[]>'.
+[19:12:02.729]     Types of parameters 'userId' and 'userId' are incompatible.
+[19:12:02.729]       Type 'number' is not assignable to type 'string'.
+[19:12:02.730] server/replit-storage.ts(293,7): error TS2353: Object literal may only specify known properties, and 'createdAt' does not exist in type '{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; transferToAccountId: number | null; ... 7 more ...; bankMemo: string | null; }'.
+[19:12:02.730] server/replit-storage.ts(300,9): error TS2416: Property 'updateTransaction' in type 'ReplitStorage' is not assignable to the same property in base type 'IStorage'.
+[19:12:02.730]   Type '(id: number, transactionData: Partial<{ [x: string]: unknown[] | [any, ...any[]] | null | undefined; [x: number]: unknown[] | [any, ...any[]] | null | undefined; envelopes?: unknown; isRecurring?: unknown; recurringFrequency?: unknown; recurringEndDate?: unknown; recurringName?: unknown; }>) => Promise<...>' is not assignable to type '(id: number, updates: Partial<{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; transferToAccountId: number | null; ... 7 more ...; bankMemo: string | null; }>) => Promise<...>'.
+[19:12:02.731]     Types of parameters 'transactionData' and 'updates' are incompatible.
+[19:12:02.731]       Type 'Partial<{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; transferToAccountId: number | null; ... 7 more ...; bankMemo: string | null; }>' is not assignable to type 'Partial<{ [x: string]: unknown[] | [any, ...any[]] | null | undefined; [x: number]: unknown[] | [any, ...any[]] | null | undefined; envelopes?: unknown; isRecurring?: unknown; recurringFrequency?: unknown; recurringEndDate?: unknown; recurringName?: unknown; }>'.
+[19:12:02.731]         Property 'date' is incompatible with index signature.
+[19:12:02.731]           Type 'Date' is not assignable to type 'unknown[] | [any, ...any[]] | null | undefined'.
+[19:12:02.731]             Type 'Date' is not assignable to type '[any, ...any[]]'.
+[19:12:02.731] server/replit-storage.ts(307,7): error TS2353: Object literal may only specify known properties, and 'updatedAt' does not exist in type '{ date: Date; id: number; userId: number; accountId: number; amount: string; merchant: string; description: string | null; isApproved: boolean; isTransfer: boolean; transferToAccountId: number | null; ... 7 more ...; bankMemo: string | null; }'.
+[19:12:02.731] server/replit-storage.ts(333,80): error TS2304: Cannot find name 'TransactionEnvelope'.
+[19:12:02.731] server/replit-storage.ts(343,41): error TS2552: Cannot find name 'InsertTransactionEnvelope'. Did you mean 'InsertTransaction'?
+[19:12:02.731] server/replit-storage.ts(343,77): error TS2304: Cannot find name 'TransactionEnvelope'.
+[19:12:02.731] server/replit-storage.ts(345,32): error TS2304: Cannot find name 'TransactionEnvelope'.
+[19:12:02.731] server/replit-storage.ts(394,9): error TS2393: Duplicate function implementation.
+[19:12:02.732] server/replit-storage.ts(445,9): error TS2393: Duplicate function implementation.
+[19:12:02.732] 
+[19:12:04.007] Using TypeScript 5.6.3 (local user-provided)
+[19:12:04.609] Using TypeScript 5.6.3 (local user-provided)
+[19:12:05.231] Using TypeScript 5.6.3 (local user-provided)
+[19:12:05.787] Build Completed in /vercel/output [42s]
+[19:12:05.989] Deploying outputs...
+[19:12:12.080] 
+[19:12:12.233] Deployment completed

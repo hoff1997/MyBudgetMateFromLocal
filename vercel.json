@@ -1,0 +1,4 @@
+{
+  "buildCommand": "rm -rf api && mkdir -p public && echo '<h1>My Budget Mate</h1><p>Access the full app: <a href=\"https://mybudgetmate.replit.app\">mybudgetmate.replit.app</a></p>' > public/index.html",
+  "outputDirectory": "public"
+}

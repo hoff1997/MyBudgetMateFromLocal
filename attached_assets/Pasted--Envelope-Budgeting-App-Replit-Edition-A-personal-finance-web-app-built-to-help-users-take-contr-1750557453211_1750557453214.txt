@@ -1,0 +1,100 @@
+💸 Envelope Budgeting App – Replit Edition
+A personal finance web app built to help users take control of their money using the proven envelope budgeting method. Designed to be secure, mobile-friendly, and packed with features inspired by apps like YNAB, Goodbudget, and PocketSmith, while staying free, user-owned, and highly customizable.
+
+🧠 Purpose
+This app is designed to:
+
+Let users assign money to virtual “envelopes” (categories) like groceries, savings, or bills
+
+Help them track spending, income, and balances across multiple bank accounts and credit cards
+
+Enable smarter financial decision-making through goal tracking, forecasting, and real-time reporting
+
+🔑 Core Features
+💼 Budget Management
+Envelope-style budgeting with persistent balances
+
+Hierarchical categories (e.g. “Household” > “Power”, “Water”)
+
+Manual and recurring transactions
+
+Opening balances that reconcile to bank accounts
+
+💳 Banking Features
+Support for multiple accounts and credit cards
+
+Credit card spending linked to a “holding envelope” for later repayment
+
+Transfers between accounts that don’t impact budgets
+
+🧾 Transaction System
+Manual entry & Quick Add form (mobile-optimized)
+
+Split one transaction across multiple envelopes
+
+Apply labels and descriptions to transactions (searchable)
+
+Create category rules (e.g. “New World” auto-maps to “Groceries”)
+
+✅ Workflow Controls
+All transactions go to an approval queue
+
+User can reassign envelopes before finalizing
+
+“Awaiting approval” layer supports review-based budgeting
+
+📈 Reporting
+Per-envelope balances
+
+Custom date range + YTD reports
+
+Transaction history by envelope, label, and date
+
+Roll-up reporting for envelope headers (toggle on/off)
+
+🚀 Tools & Add-ons
+Envelope rebalancer tool (move $500 surplus to overspent envelopes)
+
+Dashboard with customizable envelope watchlist
+
+Notifications for overspending or low funds
+
+Goal tracking (e.g. “Save $2,000 by Oct”)
+
+Forecasting / cashflow timeline
+
+Envelope history audit trail
+
+Net worth tracker
+
+👤 User Experience
+Built-in user login for multi-user capability
+
+Mobile-optimized interface
+
+Manual transaction entry, even without bank feeds (feed integration coming later)
+
+Developer Mode toggle for safe debugging and expansion
+
+🔐 Security + Development Notes
+Designed to integrate with secure bank feeds (future phase)
+
+Supports rule-based automation without auto-executing fund movements
+
+Future deployment targets: Firebase Auth, Firestore DB, hosted frontend (e.g. Vercel)
+
+🛠️ Tech Stack
+Python (starter) or React frontend in future phases
+
+File-based mock database (currently)
+
+Configured for Replit with .replit and replit.nix
+
+Future integrations: Firebase, Supabase, Stripe (for monetization)
+
+🌱 Future Monetization Model (Optional)
+Freemium app with tiered features
+
+White-label version for small businesses
+
+Add-on coaching / financial wellness course
