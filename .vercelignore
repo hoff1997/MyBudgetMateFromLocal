@@ -1,4 +1,6 @@
-# Ignore everything except the static build output
 *
 !public/
 !public/**
+!api/
+!api/**/*.ts
+!vercel.json
