@@ -1,9 +1,6 @@
 {
-  "functions": {
-    "api/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
+  "buildCommand": "npm run vercel-debug && vite build",
+  "outputDirectory": "dist/public",
   "rewrites": [
     {
       "source": "/((?!api/).*)",
