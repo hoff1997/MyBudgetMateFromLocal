@@ -1,8 +1,6 @@
 {
-  "buildCommand": "vite build && node scripts/build-api.js",
-  "outputDirectory": "dist/public",
   "functions": {
-    "dist/api/**/*.js": {
+    "api/*.ts": {
       "runtime": "nodejs18.x"
     }
   },
