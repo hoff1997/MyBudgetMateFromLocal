@@ -42,7 +42,7 @@ function Router() {
     <Switch>
       {!isAuthenticated ? (
         <>
-          <Route path="/login" component={Login} />
+          <Route path="/Login" component={Login} />
           <Route path="/register" component={Signup} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route component={Landing} />
