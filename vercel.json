@@ -1,11 +1,15 @@
 {
   "functions": {
-    "api/main.ts": {
-      "runtime": "vercel-node@3"
+    "api/**/*.ts": {
+      "runtime": "@vercel/node@3"
     }
   },
+  "buildCommand": "vite build",
+  "outputDirectory": "dist/public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/main.ts" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
   ]
 }
