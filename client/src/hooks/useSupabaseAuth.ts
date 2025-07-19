@@ -11,13 +11,16 @@ export function useSupabaseAuth() {
     let subscription: any = null;
 
     const initAuth = async () => {
+      console.log("👤 Restoring session from Supabase...");
       try {
         const { data: { session } } = await supabase.auth.getSession();
+        console.log("✅ Session from getSession:", session);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
 
         const { data: authSubscription } = supabase.auth.onAuthStateChange((_event, session) => {
+          console.log("🔁 onAuthStateChange triggered:", _event, session);
           setSession(session);
           setUser(session?.user ?? null);
           setLoading(false);
@@ -44,7 +47,7 @@ export function useSupabaseAuth() {
       email,
       password,
       options: {
-        emailRedirectTo: 'https://replit-11-july.vercel.app/dashboard' // 🔁 Replace with your actual domain
+        emailRedirectTo: 'https://replit-11-july.vercel.app/dashboard'
       }
     });
     return { data, error };
@@ -76,4 +79,3 @@ export function useSupabaseAuth() {
     isAuthenticated: !!user,
   };
 }
-//add the right domain
