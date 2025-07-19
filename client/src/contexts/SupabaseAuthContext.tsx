@@ -6,6 +6,7 @@ interface SupabaseAuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
+  isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<{
     data: any;
     error: any;
@@ -21,16 +22,36 @@ interface SupabaseAuthContextType {
     data: any;
     error: any;
   }>;
-  isAuthenticated: boolean;
 }
 
 const SupabaseAuthContext = createContext<SupabaseAuthContextType | undefined>(undefined);
 
 export function SupabaseAuthProvider({ children }: { children: React.ReactNode }) {
-  const auth = useSupabaseAuth();
+  const {
+    user,
+    session,
+    loading,
+    signUp,
+    signIn,
+    signOut,
+    resetPassword,
+  } = useSupabaseAuth();
+
+  const isAuthenticated = !!user;
 
   return (
-    <SupabaseAuthContext.Provider value={auth}>
+    <SupabaseAuthContext.Provider
+      value={{
+        user,
+        session,
+        loading,
+        signUp,
+        signIn,
+        signOut,
+        resetPassword,
+        isAuthenticated,
+      }}
+    >
       {children}
     </SupabaseAuthContext.Provider>
   );
