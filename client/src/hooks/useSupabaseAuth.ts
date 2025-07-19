@@ -2,17 +2,6 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase'; 
 import type { User, Session } from '@supabase/supabase-js';
 
-// Use environment variables directly
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-  },
-});
-
 export function useSupabaseAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -44,7 +33,7 @@ export function useSupabaseAuth() {
     initAuth();
 
     return () => {
-      if (subscription) {
+      if (subscription?.unsubscribe) {
         subscription.unsubscribe();
       }
     };
