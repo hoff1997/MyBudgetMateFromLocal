@@ -2,30 +2,16 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import type { User, Session } from '@supabase/supabase-js';
 
-// Fetch Supabase configuration from server
-let supabase: any = null;
-let configLoaded = false;
+// Use environment variables directly
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
-async function initializeSupabase() {
-  if (configLoaded) return supabase;
-  
-  try {
-    const response = await fetch('/api/config');
-    const config = await response.json();
-    
-    if (config.supabaseUrl && config.supabaseAnonKey) {
-      supabase = createClient(config.supabaseUrl, config.supabaseAnonKey);
-      console.log('Supabase client initialized successfully');
-    } else {
-      console.warn('Supabase credentials not available from server');
-    }
-  } catch (error) {
-    console.error('Failed to fetch Supabase config:', error);
-  }
-  
-  configLoaded = true;
-  return supabase;
-}
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+});
 
 export function useSupabaseAuth() {
   const [user, setUser] = useState<User | null>(null);
@@ -34,30 +20,20 @@ export function useSupabaseAuth() {
 
   useEffect(() => {
     let subscription: any = null;
-    
-    const initAuth = async () => {
-      const client = await initializeSupabase();
-      
-      if (!client) {
-        console.warn('Supabase not available, authentication disabled');
-        setLoading(false);
-        return;
-      }
 
+    const initAuth = async () => {
       try {
-        // Get initial session
-        const { data: { session } } = await client.auth.getSession();
+        const { data: { session } } = await supabase.auth.getSession();
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
 
-        // Listen for authentication changes
-        const { data: authSubscription } = client.auth.onAuthStateChange((_event, session) => {
+        const { data: authSubscription } = supabase.auth.onAuthStateChange((_event, session) => {
           setSession(session);
           setUser(session?.user ?? null);
           setLoading(false);
         });
-        
+
         subscription = authSubscription;
       } catch (error) {
         console.error('Auth initialization error:', error);
@@ -66,7 +42,7 @@ export function useSupabaseAuth() {
     };
 
     initAuth();
-    
+
     return () => {
       if (subscription) {
         subscription.unsubscribe();
@@ -75,40 +51,22 @@ export function useSupabaseAuth() {
   }, []);
 
   const signUp = async (email: string, password: string) => {
-    const client = await initializeSupabase();
-    if (!client) throw new Error('Authentication not available');
-    
-    const { data, error } = await client.auth.signUp({
-      email,
-      password,
-    });
+    const { data, error } = await supabase.auth.signUp({ email, password });
     return { data, error };
   };
 
   const signIn = async (email: string, password: string) => {
-    const client = await initializeSupabase();
-    if (!client) throw new Error('Authentication not available');
-    
-    const { data, error } = await client.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     return { data, error };
   };
 
   const signOut = async () => {
-    const client = await initializeSupabase();
-    if (!client) throw new Error('Authentication not available');
-    
-    const { error } = await client.auth.signOut();
+    const { error } = await supabase.auth.signOut();
     return { error };
   };
 
   const resetPassword = async (email: string) => {
-    const client = await initializeSupabase();
-    if (!client) throw new Error('Authentication not available');
-    
-    const { data, error } = await client.auth.resetPasswordForEmail(email);
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
     return { data, error };
   };
 
@@ -123,5 +81,3 @@ export function useSupabaseAuth() {
     isAuthenticated: !!user,
   };
 }
-
-export { initializeSupabase };
