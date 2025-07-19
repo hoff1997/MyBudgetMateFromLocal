@@ -76,3 +76,4 @@ export function useSupabaseAuth() {
     isAuthenticated: !!user,
   };
 }
+//add the right domain
