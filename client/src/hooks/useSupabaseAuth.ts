@@ -12,11 +12,22 @@ export function useSupabaseAuth() {
 
     const initAuth = async () => {
       console.log("👤 Restoring session from Supabase...");
+
       try {
         const { data: { session } } = await supabase.auth.getSession();
         console.log("✅ Session from getSession:", session);
+
+        if (!session?.user) {
+          console.warn("⚠️ No user session found. Signing out...");
+          await supabase.auth.signOut();
+          setSession(null);
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+
         setSession(session);
-        setUser(session?.user ?? null);
+        setUser(session.user);
         setLoading(false);
 
         const { data: authSubscription } = supabase.auth.onAuthStateChange((_event, session) => {
