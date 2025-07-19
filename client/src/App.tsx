@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { supabase } from "./lib/supabase";
 import { SupabaseAuthProvider, useSupabaseAuthContext } from "./contexts/SupabaseAuthContext";
+
 import Dashboard from "./pages/dashboard";
 import Envelopes from "./pages/envelopes-new";
 import Transactions from "./pages/transactions";
@@ -73,6 +76,21 @@ function Router() {
 
 export default function App() {
   console.log("Starting My Budget Mate app...");
+
+  useEffect(() => {
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("🔑 Auth state changed:", event);
+      console.log("📦 Session:", session);
+
+      if (event === "SIGNED_IN") {
+        window.location.href = "/dashboard";
+      }
+    });
+
+    return () => {
+      subscription?.subscription?.unsubscribe();
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
