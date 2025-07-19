@@ -86,7 +86,6 @@ export default function App() {
         const userId = session.user.id;
 
         try {
-          // 🔍 Check if user already has envelopes
           const { data: envelopes, error } = await supabase
             .from("envelopes")
             .select("id")
@@ -100,7 +99,6 @@ export default function App() {
           if (!envelopes || envelopes.length === 0) {
             console.log("🚀 First-time user detected — creating starter envelopes/categories...");
 
-            // 1️⃣ Insert default categories
             const defaultCategories = [
               { user_id: userId, name: "Housing" },
               { user_id: userId, name: "Food" },
@@ -115,7 +113,6 @@ export default function App() {
               console.error("Failed to create categories:", catError.message);
             }
 
-            // 2️⃣ Insert default envelopes
             const defaultEnvelopes = [
               { user_id: userId, name: "Rent", category: "Housing", sort_order: 1 },
               { user_id: userId, name: "Groceries", category: "Food", sort_order: 2 },
@@ -129,13 +126,18 @@ export default function App() {
             if (envError) {
               console.error("Failed to create envelopes:", envError.message);
             }
+          } else {
+            console.log("✅ Returning user — skipping setup");
           }
+
+          // ✅ Redirect if not already on dashboard
+          if (!window.location.pathname.includes("/dashboard")) {
+            window.location.href = "/dashboard";
+          }
+
         } catch (err) {
           console.error("Setup error:", err);
         }
-
-        // ✅ Redirect to dashboard
-        window.location.href = "/dashboard";
       }
     });
 
@@ -152,4 +154,3 @@ export default function App() {
     </QueryClientProvider>
   );
 }
-// trigger redeploy
