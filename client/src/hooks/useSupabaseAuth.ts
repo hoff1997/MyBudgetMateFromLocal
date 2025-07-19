@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase'; 
 import type { User, Session } from '@supabase/supabase-js';
 
 // Use environment variables directly
