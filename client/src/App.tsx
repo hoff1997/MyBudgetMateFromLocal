@@ -25,59 +25,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 
-function Router() {
-  const { isAuthenticated, loading } = useSupabaseAuthContext();
-
-  console.log("Router state:", { isAuthenticated, loading });
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <Switch>
-      {!isAuthenticated ? (
-        <>
-          <Route path="/Login" component={Login} />
-          <Route path="/register" component={Signup} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route component={Landing} />
-        </>
-      ) : (
-        <>
-          <Route path="/" component={ReconciliationMainPage} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/accounts" component={AccountsPage} />
-          <Route path="/envelopes-new" component={Envelopes} />
-          <Route path="/transactions" component={Transactions} />
-          <Route path="/reconciliation" component={ReconciliationMainPage} />
-          <Route path="/recurring-income" component={RecurringIncomePage} />
-          <Route path="/reports" component={ReportsPage} />
-          <Route path="/settings" component={SettingsPage} />
-          <Route path="/setup" component={SetupPage} />
-          <Route path="/zero-budget-setup" component={ZeroBudgetSetup} />
-          <Route path="/envelope-planning" component={EnvelopePlanning} />
-          <Route path="/envelope-summary" component={EnvelopeSummary} />
-          <Route path="/net-worth" component={NetWorthPage} />
-          <Route path="/debt-management" component={DebtManagementPage} />
-          <Route path="/envelope-balances" component={EnvelopeBalances} />
-        </>
-      )}
-    </Switch>
-  );
-}
-
-export default function App() {
-  console.log("Starting My Budget Mate app...");
-
-  const { user, isAuthenticated } = useSupabaseAuthContext();
+function RouterWithSetup() {
+  const { isAuthenticated, loading, user } = useSupabaseAuthContext();
   const [setupComplete, setSetupComplete] = useState(false);
 
   useEffect(() => {
@@ -141,10 +90,59 @@ export default function App() {
     runSetupIfNeeded();
   }, [user, isAuthenticated, setupComplete]);
 
+  console.log("Router state:", { isAuthenticated, loading });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Switch>
+      {!isAuthenticated ? (
+        <>
+          <Route path="/Login" component={Login} />
+          <Route path="/register" component={Signup} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route component={Landing} />
+        </>
+      ) : (
+        <>
+          <Route path="/" component={ReconciliationMainPage} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/accounts" component={AccountsPage} />
+          <Route path="/envelopes-new" component={Envelopes} />
+          <Route path="/transactions" component={Transactions} />
+          <Route path="/reconciliation" component={ReconciliationMainPage} />
+          <Route path="/recurring-income" component={RecurringIncomePage} />
+          <Route path="/reports" component={ReportsPage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Route path="/setup" component={SetupPage} />
+          <Route path="/zero-budget-setup" component={ZeroBudgetSetup} />
+          <Route path="/envelope-planning" component={EnvelopePlanning} />
+          <Route path="/envelope-summary" component={EnvelopeSummary} />
+          <Route path="/net-worth" component={NetWorthPage} />
+          <Route path="/debt-management" component={DebtManagementPage} />
+          <Route path="/envelope-balances" component={EnvelopeBalances} />
+        </>
+      )}
+    </Switch>
+  );
+}
+
+export default function App() {
+  console.log("Starting My Budget Mate app...");
+
   return (
     <QueryClientProvider client={queryClient}>
       <SupabaseAuthProvider>
-        <Router />
+        <RouterWithSetup />
       </SupabaseAuthProvider>
     </QueryClientProvider>
   );
