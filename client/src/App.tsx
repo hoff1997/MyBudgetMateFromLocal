@@ -78,17 +78,69 @@ export default function App() {
   console.log("Starting My Budget Mate app...");
 
   useEffect(() => {
-    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("🔑 Auth state changed:", event);
       console.log("📦 Session:", session);
 
-      if (event === "SIGNED_IN") {
+      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
+        const userId = session.user.id;
+
+        try {
+          // 🔍 Check if user already has envelopes
+          const { data: envelopes, error } = await supabase
+            .from("envelopes")
+            .select("id")
+            .eq("user_id", userId)
+            .limit(1);
+
+          if (error) {
+            console.error("Error checking envelopes:", error.message);
+          }
+
+          if (!envelopes || envelopes.length === 0) {
+            console.log("🚀 First-time user detected — creating starter envelopes/categories...");
+
+            // 1️⃣ Insert default categories
+            const defaultCategories = [
+              { user_id: userId, name: "Housing" },
+              { user_id: userId, name: "Food" },
+              { user_id: userId, name: "Transport" },
+            ];
+
+            const { error: catError } = await supabase
+              .from("categories")
+              .insert(defaultCategories);
+
+            if (catError) {
+              console.error("Failed to create categories:", catError.message);
+            }
+
+            // 2️⃣ Insert default envelopes
+            const defaultEnvelopes = [
+              { user_id: userId, name: "Rent", category: "Housing", sort_order: 1 },
+              { user_id: userId, name: "Groceries", category: "Food", sort_order: 2 },
+              { user_id: userId, name: "Fuel", category: "Transport", sort_order: 3 },
+            ];
+
+            const { error: envError } = await supabase
+              .from("envelopes")
+              .insert(defaultEnvelopes);
+
+            if (envError) {
+              console.error("Failed to create envelopes:", envError.message);
+            }
+          }
+        } catch (err) {
+          console.error("Setup error:", err);
+        }
+
+        // ✅ Redirect to dashboard
         window.location.href = "/dashboard";
       }
     });
 
     return () => {
-      subscription?.subscription?.unsubscribe();
+      listener.subscription?.unsubscribe?.();
     };
   }, []);
 
