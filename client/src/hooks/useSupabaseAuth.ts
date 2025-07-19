@@ -44,7 +44,7 @@ export function useSupabaseAuth() {
       email,
       password,
       options: {
-        emailRedirectTo: 'https://https://replit-11-july.vercel.app/dashboard' // 🔁 Replace with your actual domain
+        emailRedirectTo: 'https://replit-11-july.vercel.app/dashboard' // 🔁 Replace with your actual domain
       }
     });
     return { data, error };
