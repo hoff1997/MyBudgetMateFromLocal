@@ -1,84 +1,72 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { supabase } from "@/lib/supabase";
-import { defaultCategories, defaultEnvelopes } from "@/lib/default-data";
-import "@/styles/globals.css";
+// client/src/app.tsx
 
-export default function App({ Component, pageProps }) {
-  const router = useRouter();
+import { useEffect, useState } from "react";
+import { defaultEnvelopeCategories, defaultEnvelopes } from "@/lib/default-data";
+import { supabase } from "@/lib/supabase";
+
+export default function App() {
+  const [envelopes, setEnvelopes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const init = async () => {
-      console.log("🚀 Starting My Budget Mate app...");
-
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (!session?.user) {
-        console.warn("No Supabase user session found.");
+      const user = (await supabase.auth.getUser())?.data?.user;
+      if (!user) {
+        console.warn("🔒 No user found.");
         return;
       }
 
-      const userId = session.user.id;
-      console.log("✅ Supabase user ID:", userId);
-
-      // 👇 Check for existing envelopes
-      const { data: envelopes, error } = await supabase
+      const { data: existingEnvelopes, error } = await supabase
         .from("envelopes")
         .select("*")
-        .eq("user_id", userId);
+        .eq("user_id", user.id);
 
       if (error) {
-        console.error("❌ Error checking envelopes:", error.message);
+        console.error("❌ Error fetching envelopes:", error);
         return;
       }
 
-      if (!envelopes || envelopes.length === 0) {
-        console.log("🌱 First-time user — creating starter envelopes and categories...");
+      if (!existingEnvelopes || existingEnvelopes.length === 0) {
+        console.log("🚀 First-time user detected — creating starter envelopes/categories...");
 
-        // Step 1: Insert envelope categories
-        const categoriesToInsert = defaultCategories.map((cat, i) => ({
-          ...cat,
-          user_id: userId,
-          sort_order: i,
-        }));
+        for (const category of defaultEnvelopeCategories) {
+          const { data: cat, error: catErr } = await supabase
+            .from("envelope_categories")
+            .insert([{ ...category, user_id: user.id }])
+            .select()
+            .single();
 
-        const { data: insertedCats, error: catError } = await supabase
-          .from("envelope_categories")
-          .insert(categoriesToInsert)
-          .select();
+          if (catErr) {
+            console.error("⚠️ Error inserting category", category.name, catErr);
+            continue;
+          }
 
-        if (catError || !insertedCats) {
-          console.error("❌ Failed to insert default categories:", catError?.message);
-          return;
-        }
+          const categoryName = category.name;
+          const envelopesForCategory = defaultEnvelopes.filter(e => e.category === categoryName);
 
-        // Step 2: Insert envelopes linked to those categories
-        const envelopesToInsert = defaultEnvelopes.map((env, i) => {
-          const matchingCat = insertedCats.find((c) => c.name === env.category);
-          return {
-            ...env,
-            user_id: userId,
-            category_id: matchingCat?.id || null,
-            sort_order: i,
-          };
-        });
-
-        const { error: envError } = await supabase
-          .from("envelopes")
-          .insert(envelopesToInsert);
-
-        if (envError) {
-          console.error("❌ Failed to insert default envelopes:", envError.message);
-        } else {
-          console.log("✅ Starter envelopes and categories created!");
+          for (const env of envelopesForCategory) {
+            await supabase.from("envelopes").insert([{
+              ...env,
+              user_id: user.id,
+              category_id: cat.id,
+            }]);
+          }
         }
       }
+
+      setEnvelopes(existingEnvelopes);
+      setLoading(false);
     };
 
     init();
-  }, [router.pathname]);
+  }, []);
 
-  return <Component {...pageProps} />;
+  if (loading) return <div className="p-4 text-muted">Loading...</div>;
+
+  return (
+    <div className="p-6">
+      <h1 className="text-xl font-bold">Welcome to My Budget Mate</h1>
+      <pre>{JSON.stringify(envelopes, null, 2)}</pre>
+    </div>
+  );
 }
