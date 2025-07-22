@@ -27,7 +27,6 @@ import ForgotPassword from "./pages/ForgotPassword";
 
 function Router() {
   const { isAuthenticated, loading } = useSupabaseAuthContext();
-
   console.log("Router state:", { isAuthenticated, loading });
 
   if (loading) {
@@ -87,18 +86,18 @@ export default function App() {
         console.log("👤 User ID:", userId);
 
         try {
-          const { data: envelopes, error: checkError } = await supabase
+          const { data: envelopes, error } = await supabase
             .from("envelopes")
             .select("id")
             .eq("user_id", userId)
             .limit(1);
 
-          if (checkError) {
-            console.error("❌ Error checking envelopes:", checkError.message);
+          if (error) {
+            console.error("❌ Error checking envelopes:", error.message);
           }
 
           if (!envelopes || envelopes.length === 0) {
-            console.log("🚀 No envelopes found. Creating default setup...");
+            console.log("🚀 First-time user detected — creating starter envelopes/categories...");
 
             const defaultCategories = [
               { user_id: userId, name: "Housing" },
@@ -107,13 +106,13 @@ export default function App() {
             ];
 
             const { error: catError } = await supabase
-              .from("envelope_categories")
+              .from("categories")
               .insert(defaultCategories);
 
             if (catError) {
-              console.error("❌ Failed to insert categories:", catError.message);
+              console.error("❌ Failed to create categories:", catError.message);
             } else {
-              console.log("✅ Default categories inserted");
+              console.log("✅ Categories created");
             }
 
             const defaultEnvelopes = [
@@ -127,20 +126,21 @@ export default function App() {
               .insert(defaultEnvelopes);
 
             if (envError) {
-              console.error("❌ Failed to insert envelopes:", envError.message);
+              console.error("❌ Failed to create envelopes:", envError.message);
             } else {
-              console.log("✅ Default envelopes inserted");
+              console.log("✅ Envelopes created");
             }
           } else {
-            console.log("✅ Envelopes exist — skipping setup");
+            console.log("🧾 Returning user — skipping setup");
           }
 
+          // Redirect if not already on dashboard
           if (!window.location.pathname.includes("/dashboard")) {
             window.location.href = "/dashboard";
           }
 
         } catch (err) {
-          console.error("💥 Setup error:", err);
+          console.error("⚠️ Setup error:", err);
         }
       }
     });
