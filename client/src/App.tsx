@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -25,72 +25,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 
-function RouterWithSetup() {
-  const { isAuthenticated, loading, user } = useSupabaseAuthContext();
-  const [setupComplete, setSetupComplete] = useState(false);
-
-  useEffect(() => {
-    const runSetupIfNeeded = async () => {
-      if (!user || !isAuthenticated || setupComplete) return;
-
-      const userId = user.id;
-
-      try {
-        const { data: envelopes, error } = await supabase
-          .from("envelopes")
-          .select("id")
-          .eq("user_id", userId)
-          .limit(1);
-
-        if (error) {
-          console.error("Error checking envelopes:", error.message);
-          return;
-        }
-
-        if (!envelopes || envelopes.length === 0) {
-          console.log("🚀 First-time user detected — creating starter setup...");
-
-          const defaultCategories = [
-            { user_id: userId, name: "Housing" },
-            { user_id: userId, name: "Food" },
-            { user_id: userId, name: "Transport" },
-          ];
-
-          const { error: catError } = await supabase
-            .from("categories")
-            .insert(defaultCategories);
-
-          if (catError) {
-            console.error("Failed to create categories:", catError.message);
-          }
-
-          const defaultEnvelopes = [
-            { user_id: userId, name: "Rent", category: "Housing", sort_order: 1 },
-            { user_id: userId, name: "Groceries", category: "Food", sort_order: 2 },
-            { user_id: userId, name: "Fuel", category: "Transport", sort_order: 3 },
-          ];
-
-          const { error: envError } = await supabase
-            .from("envelopes")
-            .insert(defaultEnvelopes);
-
-          if (envError) {
-            console.error("Failed to create envelopes:", envError.message);
-          }
-        } else {
-          console.log("✅ Returning user — skipping setup");
-        }
-
-        setSetupComplete(true);
-      } catch (err) {
-        console.error("Setup error:", err);
-      }
-    };
-
-    runSetupIfNeeded();
-  }, [user, isAuthenticated, setupComplete]);
-
-  console.log("Router state:", { isAuthenticated, loading });
+function Router() {
+  const { isAuthenticated, loading } = useSupabaseAuthContext();
 
   if (loading) {
     return (
@@ -137,12 +73,79 @@ function RouterWithSetup() {
 }
 
 export default function App() {
-  console.log("Starting My Budget Mate app...");
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
+        const userId = session.user.id;
+
+        try {
+          const { data: envelopes, error } = await supabase
+            .from("envelopes")
+            .select("id")
+            .eq("user_id", userId)
+            .limit(1);
+
+          if (error) {
+            console.error("Error checking envelopes:", error.message);
+          }
+
+          if (!envelopes || envelopes.length === 0) {
+            console.log("🚀 First-time user detected — creating starter envelopes/categories...");
+
+            // Insert default envelope categories
+            const { data: insertedCategories, error: catError } = await supabase
+              .from("envelope_categories")
+              .insert([
+                { user_id: userId, name: "Housing", sort_order: 1 },
+                { user_id: userId, name: "Food", sort_order: 2 },
+                { user_id: userId, name: "Transport", sort_order: 3 },
+              ])
+              .select();
+
+            if (catError) {
+              console.error("❌ Failed to insert envelope categories:", catError.message);
+            }
+
+            // Use inserted category names to match category ID
+            const catMap: { [name: string]: number } = {};
+            insertedCategories?.forEach(cat => {
+              catMap[cat.name] = cat.id;
+            });
+
+            // Insert default envelopes with category_id
+            const { error: envError } = await supabase
+              .from("envelopes")
+              .insert([
+                { user_id: userId, name: "Rent", category_id: catMap["Housing"], sort_order: 1 },
+                { user_id: userId, name: "Groceries", category_id: catMap["Food"], sort_order: 2 },
+                { user_id: userId, name: "Fuel", category_id: catMap["Transport"], sort_order: 3 },
+              ]);
+
+            if (envError) {
+              console.error("❌ Failed to insert envelopes:", envError.message);
+            }
+          }
+
+          // Redirect after setup
+          if (!window.location.pathname.includes("/dashboard")) {
+            window.location.href = "/dashboard";
+          }
+
+        } catch (err) {
+          console.error("🚨 Setup error:", err);
+        }
+      }
+    });
+
+    return () => {
+      listener.subscription?.unsubscribe?.();
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <SupabaseAuthProvider>
-        <RouterWithSetup />
+        <Router />
       </SupabaseAuthProvider>
     </QueryClientProvider>
   );
