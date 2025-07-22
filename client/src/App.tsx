@@ -28,6 +28,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 function Router() {
   const { isAuthenticated, loading } = useSupabaseAuthContext();
 
+  console.log("Router state:", { isAuthenticated, loading });
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -43,7 +45,7 @@ function Router() {
     <Switch>
       {!isAuthenticated ? (
         <>
-          <Route path="/Login" component={Login} />
+          <Route path="/login" component={Login} />
           <Route path="/register" component={Signup} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route component={Landing} />
@@ -73,66 +75,72 @@ function Router() {
 }
 
 export default function App() {
+  console.log("Starting My Budget Mate app...");
+
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("🔑 Auth state changed:", event);
+      console.log("📦 Session:", session);
+
       if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
         const userId = session.user.id;
+        console.log("👤 User ID:", userId);
 
         try {
-          const { data: envelopes, error } = await supabase
+          const { data: envelopes, error: checkError } = await supabase
             .from("envelopes")
             .select("id")
             .eq("user_id", userId)
             .limit(1);
 
-          if (error) {
-            console.error("Error checking envelopes:", error.message);
+          if (checkError) {
+            console.error("❌ Error checking envelopes:", checkError.message);
           }
 
           if (!envelopes || envelopes.length === 0) {
-            console.log("🚀 First-time user detected — creating starter envelopes/categories...");
+            console.log("🚀 No envelopes found. Creating default setup...");
 
-            // Insert default envelope categories
-            const { data: insertedCategories, error: catError } = await supabase
+            const defaultCategories = [
+              { user_id: userId, name: "Housing" },
+              { user_id: userId, name: "Food" },
+              { user_id: userId, name: "Transport" },
+            ];
+
+            const { error: catError } = await supabase
               .from("envelope_categories")
-              .insert([
-                { user_id: userId, name: "Housing", sort_order: 1 },
-                { user_id: userId, name: "Food", sort_order: 2 },
-                { user_id: userId, name: "Transport", sort_order: 3 },
-              ])
-              .select();
+              .insert(defaultCategories);
 
             if (catError) {
-              console.error("❌ Failed to insert envelope categories:", catError.message);
+              console.error("❌ Failed to insert categories:", catError.message);
+            } else {
+              console.log("✅ Default categories inserted");
             }
 
-            // Use inserted category names to match category ID
-            const catMap: { [name: string]: number } = {};
-            insertedCategories?.forEach(cat => {
-              catMap[cat.name] = cat.id;
-            });
+            const defaultEnvelopes = [
+              { user_id: userId, name: "Rent", category: "Housing", sort_order: 1 },
+              { user_id: userId, name: "Groceries", category: "Food", sort_order: 2 },
+              { user_id: userId, name: "Fuel", category: "Transport", sort_order: 3 },
+            ];
 
-            // Insert default envelopes with category_id
             const { error: envError } = await supabase
               .from("envelopes")
-              .insert([
-                { user_id: userId, name: "Rent", category_id: catMap["Housing"], sort_order: 1 },
-                { user_id: userId, name: "Groceries", category_id: catMap["Food"], sort_order: 2 },
-                { user_id: userId, name: "Fuel", category_id: catMap["Transport"], sort_order: 3 },
-              ]);
+              .insert(defaultEnvelopes);
 
             if (envError) {
               console.error("❌ Failed to insert envelopes:", envError.message);
+            } else {
+              console.log("✅ Default envelopes inserted");
             }
+          } else {
+            console.log("✅ Envelopes exist — skipping setup");
           }
 
-          // Redirect after setup
           if (!window.location.pathname.includes("/dashboard")) {
             window.location.href = "/dashboard";
           }
 
         } catch (err) {
-          console.error("🚨 Setup error:", err);
+          console.error("💥 Setup error:", err);
         }
       }
     });
