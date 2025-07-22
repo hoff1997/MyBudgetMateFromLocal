@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { supabase } from "./lib/supabase";
 import { SupabaseAuthProvider, useSupabaseAuthContext } from "./contexts/SupabaseAuthContext";
 
+// Pages
 import Dashboard from "./pages/dashboard";
 import Envelopes from "./pages/envelopes-new";
 import Transactions from "./pages/transactions";
@@ -44,7 +45,7 @@ function Router() {
     <Switch>
       {!isAuthenticated ? (
         <>
-          <Route path="/login" component={Login} />
+          <Route path="/Login" component={Login} />
           <Route path="/register" component={Signup} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route component={Landing} />
@@ -83,7 +84,7 @@ export default function App() {
 
       if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
         const userId = session.user.id;
-        console.log("👤 User ID:", userId);
+        console.log("🧍‍♂️ User ID:", userId);
 
         try {
           const { data: envelopes, error } = await supabase
@@ -106,7 +107,7 @@ export default function App() {
             ];
 
             const { error: catError } = await supabase
-              .from("categories")
+              .from("envelope_categories")
               .insert(defaultCategories);
 
             if (catError) {
@@ -131,16 +132,15 @@ export default function App() {
               console.log("✅ Envelopes created");
             }
           } else {
-            console.log("🧾 Returning user — skipping setup");
+            console.log("✅ Returning user — skipping envelope setup");
           }
 
-          // Redirect if not already on dashboard
           if (!window.location.pathname.includes("/dashboard")) {
             window.location.href = "/dashboard";
           }
 
         } catch (err) {
-          console.error("⚠️ Setup error:", err);
+          console.error("❌ Setup error:", err);
         }
       }
     });
